@@ -53,7 +53,7 @@ const (
 	// before the request should be retried.
 	// In future this should be replaced with a more dynamic exponential
 	// back-off algorithm.
-	retryAfterLastFailure = time.Minute
+	retryAfterLastFailure = time.Hour
 )
 
 // This controller observes the state of the certificate's currently
