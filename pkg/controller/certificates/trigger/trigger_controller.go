@@ -53,7 +53,7 @@ const (
 	// before the request should be retried.
 	// In future this should be replaced with a more dynamic exponential
 	// back-off algorithm.
-	retryAfterLastFailure = time.Hour
+	retryAfterLastFailure = time.Minute
 )
 
 // This controller observes the state of the certificate's currently
@@ -162,7 +162,7 @@ func (c *controller) ProcessItem(ctx context.Context, key string) error {
 	// in failing mode for less than 1 hour.
 	backoff, delay := shouldBackoffReissuingOnFailure(log, c.clock, input.Certificate)
 	if backoff {
-		log.V(logf.InfoLevel).Info("Not re-issuing certificate as an attempt has been made in the last hour", "retry_delay", delay)
+		log.V(logf.InfoLevel).Info("Not re-issuing certificate as an attempt has been made in the last minute", "retry_delay", delay)
 		c.scheduleRecheckOfCertificateIfRequired(log, key, delay)
 		return nil
 	}
